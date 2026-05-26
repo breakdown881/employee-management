@@ -12,12 +12,16 @@ def show_employee_list(db_file):
         return
     
     name = st.text_input("Search by Name")
+    phone = st.text_input("Search by Phone")
+    email = st.text_input("Search by Email")
     department = st.text_input("Search by Department")
     age_range = st.slider("Search by Age Range", 18, 65, (18, 65))
     
     filtered_employees = [emp for emp in employees if
                           (name.lower() in emp['name'].lower() if name else True) and
                           (department.lower() in emp['department'].lower() if department else True) and
+                          (phone in emp['phone'] if phone else True) and
+                          (email in emp['email'] if email else True) and
                           age_range[0] <= emp['age'] <= age_range[1]]
 
     if filtered_employees:
